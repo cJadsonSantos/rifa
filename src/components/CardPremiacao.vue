@@ -3,6 +3,7 @@ import Cotas from '@/components/Cotas.vue'
 import { useCurrentDate } from '@/helpers/useCurrentDate'
 import { useCotas } from '@/helpers/useCotas'
 import CountCotas from '@/components/CountCotas.vue'
+import { BoltIcon } from '@heroicons/vue/24/solid'
 
 const currentDate = useCurrentDate()
 const { cotas, toggleSelected } = useCotas()
@@ -12,7 +13,11 @@ const { cotas, toggleSelected } = useCotas()
   <div class="flex content-center justify-center">
     <div class="max-w-xl rounded-3xl overflow-hidden shadow-lg bg-gray-50">
 
-      <div class="font-bold text-xl m-2 p-4">Prêmios
+      <div class="font-bold text-xl m-2 p-4">
+        <div class="flex">
+          <BoltIcon class="h-6 w-6 text-yellow-400" />
+          <p>Prêmios</p>
+        </div>
         <span class="font-thin text-sm text-gray-500">Escolha sua sorte</span>
       </div>
 
