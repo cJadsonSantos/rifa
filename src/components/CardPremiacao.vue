@@ -34,11 +34,9 @@ const { cotas, toggleSelected } = useCotas()
       <div class="grid grid-cols-2 gap-2 mx-14">
         <Cotas v-for="item in cotas" :key="item.value" :message="item.message" :value="item.value"
                :selected="item.selected" @click="toggleSelected(item)" />
-
-        <CountCotas />
       </div>
 
-
+      <CountCotas />
     </div>
   </div>
 </template>
