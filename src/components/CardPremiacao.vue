@@ -1,37 +1,47 @@
 <script setup lang="ts">
-const currentDate = (): string => {
-  const currentDate = new Date()
-  const day = currentDate.getDate()
-  const month = currentDate.getMonth() + 1
-  const year = currentDate.getFullYear()
-  return `${day}/${month}/${year}`
-}
+import Cotas from '@/components/Cotas.vue'
+import { useCurrentDate } from '@/helpers/useCurrentDate'
+import { useCotas } from '@/helpers/useCotas'
+import CountCotas from '@/components/CountCotas.vue'
+import { BoltIcon } from '@heroicons/vue/24/solid'
 
+const currentDate = useCurrentDate()
+const { cotas, toggleSelected } = useCotas()
 </script>
 
 <template>
   <div class="flex content-center justify-center">
     <div class="max-w-xl rounded-3xl overflow-hidden shadow-lg bg-gray-50">
 
-      <div class="font-bold text-xl m-2 p-4">Prêmios
+      <div class="font-bold text-xl m-2 p-4">
+        <div class="flex">
+          <BoltIcon class="h-6 w-6 text-yellow-400" />
+          <p>Prêmios</p>
+        </div>
         <span class="font-thin text-sm text-gray-500">Escolha sua sorte</span>
       </div>
 
       <div class="px-6 py-4">
         <img src="https://i.imgur.com/NMxvkki.jpeg" alt="Image" class="w-full">
-        <div class="font-bold mb-2">50 Iphones.</div>
-        <p class="text-gray-700 text-sm font-thin">50 Iphones.</p>
 
-        <div class="mt-2">
-          <span class="bg-green-600 text-white py-1 px-2 rounded-full text-xs">Em Andamento</span>
+        <div class="py-2">
+          <p>50 Iphones.</p>
+          <p class="text-gray-700 text-sm font-thin">50 Iphones.</p>
         </div>
 
-        <div class="flex justify-end">
-          <span class="text-gray-600 text-sm font-thin">{{ currentDate() }}</span>
+        <div class="mt-2 flex justify-between">
+          <span class="bg-green-600 text-white py-1 px-2 rounded-full text-xs">Em Andamento</span>
+          <span class="text-gray-600 text-sm font-thin">{{ currentDate }}</span>
         </div>
 
       </div>
 
+      <div class="grid grid-cols-2 gap-2 mx-14">
+        <Cotas v-for="item in cotas" :key="item.value" :message="item.message" :value="item.value"
+               :selected="item.selected" @click="toggleSelected(item)" />
+      </div>
+
+      <CountCotas />
     </div>
   </div>
 </template>
